@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metric KYC Demo</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script type="text/javascript" src="https://sdk.dev.metric.africa/v1"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Metric KYC Demo</h1>
+        <p>Click the button below to verify your identity using Metric.</p>
+        <button id="verifyBtn" onclick="verifyUser()">Start Verification</button>
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        const verifyUser = () => {
+            const metric = new window.Metric({
+                client_id: "XXXXXXXXXX",
+                client_secret: "XXXXXXXXXX",
+            });
+
+            metric.verify(
+                "ghana_card",
+                {
+                    card_number: "GHA-000000000-0",
+                    reference_id: "0300000000",
+                    purpose: "state your purpose",
+                    phone_number: "030000000",
+                },
+                (results) => {
+                    console.log(results.status, results.transaction_number);
+                },
+                null,
+                {
+                    //sdk optional configs
+                }
+            );
+        };
+    </script>
+
+    <!-- <script src="./src/main.js"></script> -->
+</body>
+
+</html>
